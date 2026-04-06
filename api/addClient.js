@@ -1,4 +1,9 @@
 export default async function handler(req, res) {
+  
+  if (req.headers.authorization !== `Bearer ${process.env.API_SECRET}`) {
+    return res.status(403).json({ success: false });
+  }
+  
   const panelResp = await fetch(`${process.env.PANEL_BASE_URL}/panel/api/inbounds/addClient`, {
     method: "POST",
     headers: {
