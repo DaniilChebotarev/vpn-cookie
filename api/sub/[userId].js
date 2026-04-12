@@ -1,8 +1,8 @@
 module.exports = async function handler(req, res) {
   const { userId } = req.query;
 
-  const SUB_URL_1 = process.env.SUB_URL_1;
-  const SUB_URL_2 = process.env.SUB_URL_2;
+  const SUB_URL_1 = process.env.SERVER1_URL;
+  const SUB_URL_2 = process.env.SERVER2_URL;
 
   res.json({ 
     userId,
