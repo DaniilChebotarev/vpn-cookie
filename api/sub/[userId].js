@@ -1,8 +1,8 @@
 module.exports = async function handler(req, res) {
   const { userId } = req.query;
 
-  const SUB_URL_1 = process.env.PANEL_BASE_URL;
-  const SUB_URL_2 = process.env.PANEL_BASE_URL_2;
+  const SUB_URL_1 = process.env.SUB1_URL;
+  const SUB_URL_2 = process.env.SUB2_URL;
 
   const [r1, r2] = await Promise.all([
     fetch(`${SUB_URL_1}/${userId}`),
