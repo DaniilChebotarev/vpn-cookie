@@ -9,12 +9,16 @@ module.exports = async function handler(req, res) {
 
     const [t1, t2] = await Promise.all([r1.text(), r2.text()]);
 
-    res.json({
-      status1: r1.status,
-      status2: r2.status,
-      text1: t1.substring(0, 200),
-      text2: t2.substring(0, 200)
-    });
+    const decode = (str) => Buffer.from(str.trim(), "base64").toString("utf-8");
+
+    const lines = [];
+    if (r1.ok) lines.push(decode(t1));
+    if (r2.ok) lines.push(decode(t2));
+
+    const result = Buffer.from(lines.join("\n").trim()).toString("base64");
+
+    res.setHeader("Content-Type", "text/plain");
+    res.send(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
